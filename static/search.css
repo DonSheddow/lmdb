@@ -1,0 +1,27 @@
+.film-list {
+  background-color: #1a1a1a;
+  max-width: 750px;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+
+.film-list__item {
+  display: block;
+  padding: 20px;
+}
+
+.thumbnail {
+  width: 110px;
+  float: left;
+  margin-right: 1em;
+}
+
+a {
+  outline: none;
+  border: 0;
+}
+
+.title {
+  font-family: sans-serif;
+  font-weight: normal;
+}

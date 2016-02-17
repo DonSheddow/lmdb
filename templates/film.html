@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+
+{% block title %}{{ film.title }} - Verdensteaterveven{% endblock %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" type="text/css" href="/static/film.css">
+{% endblock %}
+
+
+{% block body %}
+  
+  <h1 class="film-title">{{ film.title }}</h1>
+  <img class="poster" src="/static/images/{{ film.id }}.jpg"/>
+  
+  {% for genre in film.genres %}
+    <a class="search-link" href="">{{ genre.name }}</a>
+  {% endfor %}
+  
+  <p class="summary">{{ film.summary }}</p>
+  
+  {% for performance in film.performances[:5] %}
+  <div class="actor">
+    <a class="search-link" href="">{{ performance.actor.name }}</a>
+  </div>
+  {% endfor %}
+  
+  
+{% endblock %}

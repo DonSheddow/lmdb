@@ -1,0 +1,20 @@
+.poster {
+  overflow: auto;
+  float: left;
+  margin-right: 20px;
+}
+
+.actor {
+  display: block;
+  padding: 4px;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.summary {
+  line-height: 1.4;
+  font-size: 18px;
+  max-width: 75%;
+}

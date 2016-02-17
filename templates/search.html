@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+
+{% block title %}Search - Verdensteaterveven{% endblock %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" type="text/css" href="/static/search.css">
+{% endblock %}
+
+
+{% block body %}
+  <div>
+    <div class="film-list">
+    {% for film in films %}
+      <div class="film-list__item clearfix">
+        <a href="../film/{{ film.id }}">
+          <img class="thumbnail" src="../static/images/{{ film.id }}.jpg"/>
+        <a/>
+        <div>
+          <a href="../film/{{ film.id }}">
+            <h3 class="title">{{ film.title }}</h3>
+          <a/>
+          <span>{{ film.tmdb_rating }}</span>
+        </div>
+      </div>
+      <br/>
+    {% endfor %}
+    </div>
+  </div>
+  
+{% endblock %}

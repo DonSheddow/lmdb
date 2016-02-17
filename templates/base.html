@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  {% block head %}
+  <link rel="stylesheet" type="text/css" href="/static/base.css">
+  <title>{% block title %}{% endblock %}</title>
+  {% endblock %}
+</head>
+
+<body>
+  
+  <div class="header">
+    <a class="header__item" href="/">Home</a>
+    <a class="header__item" href="">Browse</a>
+  </div>
+  
+  {% block body %}
+  {% endblock %}
+  
+</body>
+
+</html>

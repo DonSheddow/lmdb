@@ -1,0 +1,80 @@
+.main-content {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.main-content div {
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+.search-box {
+  background-color: #202020;
+  border-radius: 8px;
+/*  border-top-left-radius: 8px 4px;
+  border-bottom-left-radius: 8px 4px;
+  border-top-right-radius: 8px 4px;
+  border-bottom-right-radius: 8px 4px;*/
+  box-shadow: inset 0px 2px 7px 3px black;
+  padding: 5px;
+  padding-left: 6px;
+  height: 100%;
+}
+.search-box__input {
+  background-color: transparent;
+  color: #ccc;
+  width: 18em;
+  font-size: 16px;
+  border: none;
+  margin: 0;
+}
+.search-box__button {
+  position: relative;
+  background-image: url(/static/icons/search-128-gray.png);
+  background-repeat: no-repeat;
+  background-size: 22px 22px;
+  background-color: transparent;
+  cursor: pointer;
+  width: 22px;
+  height: 22px;
+  top: -6px;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.film-group {
+  padding-top: 1em;
+}
+
+.section-title {
+  font-family: sans-serif;
+  font-weight: normal;
+}
+
+.thumbnail_container {
+  padding: 20px;
+}
+
+.thumbnail {
+  display: block;
+  width: 110px;
+  margin-left: auto;
+  margin-right: auto;
+  transform: scale(1);
+  transition: transform 0.25s;
+}
+
+.thumbnail:hover {
+  transform: scale(1.2);
+}
+
+.film_listing {
+  display: inline-flex;
+  align-items: center;
+  border: 2px dotted grey;
+  border-radius: 5px;
+  background-color: #1a1a1a;
+}
+

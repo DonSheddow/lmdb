@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}Verdensteaterveven{% endblock %}
+{% block head %}
+  {{ super() }}
+  <link rel="stylesheet" type="text/css" href="/static/main.css">
+{% endblock %}
+
+{% block body %}
+    
+  <div class="center">
+    <form class="center__inner" action="search">
+      <span class="search-box">
+        <input class="search-box__input" type="text" name="title" placeholder="Search for title..." autofocus>
+        <button class="search-box__button" type="submit"></button>
+      </span>
+    </form>
+  </div>
+  
+  <div class="main-content">
+      
+      <div class="film-group">
+        <h2 class="section-title">My Favorites</h2>
+        <div class="film_listing">
+          {% for film in favorites %}
+            <div class="thumbnail_container">
+              <a href="film/{{ film.id }}">
+                <img class="thumbnail" src="static/images/{{ film.id }}.jpg"/>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+
+      </div>
+      
+      
+      <div class="film-group">
+        <h2 class="section-title">Recently Viewed</h2>
+        <div class="film_listing">
+          {% for film in recently_viewed %}
+            <div class="thumbnail_container">
+              <a href="film/{{ film.id }}">
+                <img class="thumbnail" src="static/images/{{ film.id }}.jpg"/>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      
+      <div class="film-group">
+        <h2 class="section-title">Recently Added</h2>
+        <div class="film_listing">
+          {% for film in recently_added %}
+            <div class="thumbnail_container">
+              <a href="film/{{ film.id }}">
+                <img class="thumbnail" src="static/images/{{ film.id }}.jpg"/>
+              </a>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+      
+  </div>
+
+
+{% endblock %}
