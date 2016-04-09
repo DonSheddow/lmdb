@@ -1,7 +1,5 @@
 import re
 
-from copy import deepcopy
-
 import tmdb
 import ttdb
 
@@ -56,7 +54,7 @@ class Data(object):
 
 
 class TVData(Data):
-    TMDB_KEYMAP = deepcopy(Data.TMDB_KEYMAP)
+    TMDB_KEYMAP = Data.TMDB_KEYMAP.copy()
     TMDB_KEYMAP['title'] = 'original_name'
 
 
