@@ -5,10 +5,9 @@ from datetime import datetime, timedelta
 
 import data
 
-from config import TMDB_APIKEY
-
 BASE_URL = 'http://api.themoviedb.org/3/'
-API_KEY = TMDB_APIKEY
+with open('tmdb.apikey', 'r') as f:
+    API_KEY = f.readline().strip()
 
 config = {}
 

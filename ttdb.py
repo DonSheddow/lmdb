@@ -9,8 +9,9 @@ from subprocess import Popen, DEVNULL
 import config
 
 BASE_URL = 'http://thetvdb.com/api/'
-API_KEY = config.TTDB_APIKEY
 
+with open('ttdb.apikey', 'r') as f:
+    API_KEY = f.readline().strip()
 
 
 def from_imdbid(imdb_id):
