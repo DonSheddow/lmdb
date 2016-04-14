@@ -9,6 +9,13 @@ from db import session_scope
 
 
 def add_film_with_session(pathname, session):
+    """Adds a film to the database, using the given session.
+
+    This function looks at the pathname to determine the title
+    and (optionally) the year of the film. Retrieves data via the
+    data module, and adds the data along with the pathname
+    to the database.
+    """
     title = splitext(pathname)[0]
     d = data.search(title)
 
@@ -48,6 +55,11 @@ def add_film_with_session(pathname, session):
 
 
 def add_film(pathname):
+    """Adds a film to the database.
+
+    Creates a new session s, then calls
+    add_film_with_session(pathname, s)
+    """
     with session_scope() as session:
         add_film_with_session(pathname, session)
 
