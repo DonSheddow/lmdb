@@ -3,7 +3,7 @@ import pyinotify
 from os.path import basename
 from contextlib import contextmanager
 
-import config
+from lmdb import config
 
 from films import add_film
 

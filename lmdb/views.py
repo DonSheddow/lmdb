@@ -1,15 +1,13 @@
 import random
-from flask import Flask
 from flask import render_template
 from flask import request
 from flask import redirect
 from flask import url_for
 from flask import send_from_directory
 
-from db import Session
-from models import Media
-
-app = Flask(__name__)
+from lmdb import app
+from lmdb.db import Session
+from lmdb.models import Media
 
 @app.route('/')
 def main():

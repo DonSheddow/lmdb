@@ -6,8 +6,6 @@ import xml.etree.ElementTree as ET
 
 from subprocess import Popen, DEVNULL
 
-import config
-
 BASE_URL = 'http://thetvdb.com/api/'
 
 with open('ttdb.apikey', 'r') as f:

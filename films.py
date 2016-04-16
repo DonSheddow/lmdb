@@ -3,9 +3,9 @@ from os.path import splitext
 import requests
 
 import data
-import config
-from models import Media, Movie, TV, Genre, Actor, Performance
-from db import session_scope
+from lmdb import config
+from lmdb.models import Media, Movie, TV, Genre, Actor, Performance
+from lmdb.db import session_scope
 
 
 def add_film_with_session(pathname, session):
@@ -45,11 +45,14 @@ def add_film_with_session(pathname, session):
 
     session.add(entry)
 
+    # FIXME: poster_url() might be None
     url = d.poster_url()
     r = requests.get(url)
     r.raise_for_status()
 
     session.commit()
+    # FIXME: We need to commit session in order to access entry.id,
+    # but that means we can't rollback() if the below lines throws an error
     with open(config.IMAGE_DIR + '/%s.jpg' % entry.id, 'wb') as f:
         f.write(r.content)
 
