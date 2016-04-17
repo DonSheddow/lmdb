@@ -1,2 +1,2 @@
 from lmdb import app
-app.run(debug=True)
+app.run()

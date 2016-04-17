@@ -3,7 +3,7 @@ import pyinotify
 from os.path import basename
 from contextlib import contextmanager
 
-from lmdb import config
+from lmdb import app
 
 from films import add_film
 
@@ -21,6 +21,6 @@ class EventHandler(pyinotify.ProcessEvent):
 handler = EventHandler()
 notifier = pyinotify.Notifier(wm, handler)
 
-wdd = wm.add_watch(config.FILM_DIR, mask)
+wdd = wm.add_watch(app.config['FILM_DIR'], mask)
 
 notifier.loop(daemonize=True, stdout='/tmp/lmdb.out', stderr='/tmp/lmdb.out', pid_file='/tmp/lmdb.pid')

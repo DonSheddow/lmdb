@@ -3,7 +3,7 @@ from os.path import splitext
 import requests
 
 import data
-from lmdb import config
+from lmdb import app
 from lmdb.models import Media, Movie, TV, Genre, Actor, Performance
 from lmdb.db import session_scope
 
@@ -53,7 +53,7 @@ def add_film_with_session(pathname, session):
     session.commit()
     # FIXME: We need to commit session in order to access entry.id,
     # but that means we can't rollback() if the below lines throws an error
-    with open(config.IMAGE_DIR + '/%s.jpg' % entry.id, 'wb') as f:
+    with open(app.config['IMAGE_DIR'] + '/%s.jpg' % entry.id, 'wb') as f:
         f.write(r.content)
 
 
