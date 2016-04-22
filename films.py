@@ -4,8 +4,8 @@ import requests
 
 import data
 from lmdb import app
+from lmdb import db
 from lmdb.models import Media, Movie, TV, Genre, Actor, Performance
-from lmdb.db import session_scope
 
 
 def add_film_with_session(pathname, session):
@@ -58,13 +58,19 @@ def add_film_with_session(pathname, session):
 
 
 def add_film(pathname):
-    """Adds a film to the database.
+    """Adds a film to the database
 
-    Creates a new session s, then calls
-    add_film_with_session(pathname, s)
+    Calls add_film_with_session,
+    taking care to rollback the session if any errors occur.
     """
-    with session_scope() as session:
-        add_film_with_session(pathname, session)
+    # If using db.session outside a request context proves problematic,
+    # consider using app.test_request_context()
+    try:
+        add_film_with_session(pathname, db.session)
+        db.session.commit()
+    except:
+        db.session.rollback()
+        raise
 
 
 def remove_film_with_session(pathname, session):
@@ -72,7 +78,11 @@ def remove_film_with_session(pathname, session):
     session.delete(entry)
 
 def remove_film(pathname):
-    with session_scope() as session:
-        remove_film_with_session(pathname, session)
+    try:
+        remove_film_with_session(pathname, db.session)
+        db.session.commit()
+    except:
+        db.session.rollback()
+        raise
 
 

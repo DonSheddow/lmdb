@@ -1,59 +1,55 @@
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import relationship
-from sqlalchemy import Column, Integer, String, Float, ForeignKey, Table
+from lmdb import db
 
-Base = declarative_base()
-
-media_genres = Table('media_genres', Base.metadata,
-    Column('media_id', Integer, ForeignKey('media.id')),
-    Column('genre_id', Integer, ForeignKey('genres.id'))
+media_genres = db.Table('media_genres',
+    db.Column('media_id', db.Integer, db.ForeignKey('media.id')),
+    db.Column('genre_id', db.Integer, db.ForeignKey('genres.id'))
 )
 
 
-class Genre(Base):
+class Genre(db.Model):
     __tablename__ = 'genres'
-    id = Column(Integer, primary_key=True)
-    name = Column(String(50), index=True, unique=True)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(50), index=True, unique=True)
     
     def __repr__(self):
         return "<Genre('%s')>" % self.name
 
 
-class Actor(Base):
+class Actor(db.Model):
     __tablename__ = 'actors'
-    id = Column(Integer, primary_key=True)
-    name = Column(String, index=True, unique=True)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String, index=True, unique=True)
     
     def __repr__(self):
         return "<Actor('%s')>" % self.name
 
 
 
-class Performance(Base):
+class Performance(db.Model):
     __tablename__ = 'performances'
-    media_id = Column(Integer, ForeignKey('media.id'), primary_key=True)
-    actor_id = Column(Integer, ForeignKey('actors.id'), primary_key=True)
-    role = Column(String)
-    actor = relationship("Actor", backref="performances")
+    media_id = db.Column(db.Integer, db.ForeignKey('media.id'), primary_key=True)
+    actor_id = db.Column(db.Integer, db.ForeignKey('actors.id'), primary_key=True)
+    role = db.Column(db.String)
+    actor = db.relationship("Actor", backref="performances")
     
     def __repr__(self):
         return "<Performance('%s', '%s')" % (self.actor.name, self.role)
     
 
 
-class Media(Base):
+class Media(db.Model):
     __tablename__ = 'media'
-    id = Column(Integer, primary_key=True)
-    pathname = Column(String, index=True, unique=True)
-    title = Column(String)
-    summary = Column(String)
-    tmdb_rating = Column(Float)
+    id = db.Column(db.Integer, primary_key=True)
+    pathname = db.Column(db.String, index=True, unique=True)
+    title = db.Column(db.String)
+    summary = db.Column(db.String)
+    tmdb_rating = db.Column(db.Float)
     
-    genres = relationship('Genre', secondary=media_genres, backref='media')
+    genres = db.relationship('Genre', secondary=media_genres, backref='media')
     
-    performances = relationship("Performance")
+    performances = db.relationship("Performance")
     
-    type = Column(String(32))
+    type = db.Column(db.String(32))
     
     __mapper_args__ = {
         'polymorphic_on': type
@@ -63,7 +59,7 @@ class Media(Base):
 
 class Movie(Media):
     __tablename__ = 'movies'
-    id = Column(Integer, ForeignKey('media.id'), primary_key=True)
+    id = db.Column(db.Integer, db.ForeignKey('media.id'), primary_key=True)
     
     __mapper_args__ = {
         'polymorphic_identity': 'movie'
@@ -75,7 +71,7 @@ class Movie(Media):
 
 class TV(Media):
     __tablename__ = 'tv'
-    id = Column(Integer, ForeignKey('media.id'), primary_key=True)
+    id = db.Column(db.Integer, db.ForeignKey('media.id'), primary_key=True)
     
     __mapper_args__ = {
         'polymorphic_identity': 'tv'
