@@ -1,0 +1,16 @@
+DEBUG = True
+
+SQLALCHEMY_DATABASE_URI = "sqlite:///test.db"
+
+# Define these if you want to fetch movie info from The Movie Database or TheTVDB
+#TMDB_API_KEY = 
+#TTDB_API_KEY = 
+
+# This is where lmdb looks for movies and TV shows to add to the database
+# Initialized to ~/Videos by default
+#FILM_DIR = 
+
+# This is where lmdb saves movie and TV posters downloaded from TMDb or TheTVDB
+# If you want Apache to serve your image files instead of Flask,
+# you need to set this to a directory in Apache's webroot
+#IMAGE_DIR =

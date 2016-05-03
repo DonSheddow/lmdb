@@ -4,10 +4,15 @@ from time import sleep
 from datetime import datetime, timedelta
 
 import data
+from lmdb import app
 
 BASE_URL = 'http://api.themoviedb.org/3/'
-with open('tmdb.apikey', 'r') as f:
-    API_KEY = f.readline().strip()
+
+try:
+    API_KEY = app.config['TMDB_API_KEY']
+except KeyError as e:
+    e.message = "Can't find API key for TMDb. Please define TMDB_API_KEY in the configuration file"
+    raise
 
 config = {}
 

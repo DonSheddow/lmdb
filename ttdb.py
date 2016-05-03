@@ -6,11 +6,15 @@ import xml.etree.ElementTree as ET
 
 from subprocess import Popen, DEVNULL
 
+from lmdb import app
+
 BASE_URL = 'http://thetvdb.com/api/'
 
-with open('ttdb.apikey', 'r') as f:
-    API_KEY = f.readline().strip()
-
+try:
+    API_KEY = app.config['TTDB_API_KEY']
+except KeyError as e:
+    e.message = "Can't find API key for TTDb. Please define TTDB_API_KEY in the configuration file"
+    raise
 
 def from_imdbid(imdb_id):
     params = {'imdbid': imdb_id}

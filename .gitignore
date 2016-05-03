@@ -3,3 +3,4 @@ lmdb/static/images
 *.db
 *.apikey
 *.swp
+*.conf
