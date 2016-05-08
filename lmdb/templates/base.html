@@ -16,6 +16,14 @@
   </div>
   
   {% block body %}
+  <div class="center">
+    <form class="center__inner" action="search">
+      <span class="search-box">
+        <input class="search-box__input" type="text" name="title" placeholder="Search for title...">
+        <button class="search-box__button" type="submit"></button>
+      </span>
+    </form>
+  </div>
   {% endblock %}
   
 </body>
