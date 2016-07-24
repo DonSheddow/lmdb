@@ -11,23 +11,27 @@
 {% block body %}
   {{ super() }}
 
-  <div>
     <div class="film-list">
-    {% for film in films %}
-      <div class="film-list__item clearfix">
-        <a href="../film/{{ film.id }}">
-          <img class="thumbnail" src="../static/images/{{ film.id }}.jpg"/>
-        <a/>
-        <div>
-          <a href="../film/{{ film.id }}">
-            <h3 class="title">{{ film.title }}</h3>
-          <a/>
-          <span>{{ film.tmdb_rating }}</span>
-        </div>
-      </div>
-      <br/>
-    {% endfor %}
+      {% if films %}
+        {% for film in films %}
+          <div class="film-list__item clearfix">
+            <a href="../film/{{ film.id }}">
+              <img class="thumbnail" src="../static/images/{{ film.id }}.jpg"/>
+            <a/>
+            <div>
+              <a href="../film/{{ film.id }}">
+                <h3 class="title">{{ film.title }}</h3>
+              <a/>
+              <span>{{ film.tmdb_rating }}</span>
+            </div>
+          </div>
+          <br/>
+        {% endfor %}
+      {% else %}
+        <span>
+          Oops... Your search returned no results. :/
+        </span>
+      {% endif %}
     </div>
-  </div>
   
 {% endblock %}
