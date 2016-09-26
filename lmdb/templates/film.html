@@ -5,13 +5,16 @@
 {% block head %}
   {{ super() }}
   <link rel="stylesheet" type="text/css" href="/static/film.css">
+  <link rel="stylesheet" type="text/css" href="http://vjs.zencdn.net/5.11.6/video-js.css">
+  <script src="http://vjs.zencdn.net/5.11.6/video.js"></script>
+  <script src="/static/film.js"></script>
 {% endblock %}
 
 
 {% block body %}
   
   <h1 class="film-title">{{ film.title }}</h1>
-  <img class="poster" src="/static/images/{{ film.id }}.jpg"/>
+  <img id="poster" class="poster" src="/static/images/{{ film.id }}.jpg"/>
   
   {% for genre in film.genres %}
     <a class="search-link" href="">{{ genre.name }}</a>
@@ -24,6 +27,12 @@
     <a class="search-link" href="">{{ performance.actor.name }}</a>
   </div>
   {% endfor %}
+
+  <video id="video" class="video-js vjs-default-skin"
+      width="1920" height="1080"
+      preload="none" controls>
+    <source src="/media/test.ogv" type="video/mp4"/>
+  </video>
   
   
 {% endblock %}

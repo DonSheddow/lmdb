@@ -14,3 +14,13 @@ SQLALCHEMY_DATABASE_URI = "sqlite:///test.db"
 # If you want Apache to serve your image files instead of Flask,
 # you need to set this to a directory in Apache's webroot
 #IMAGE_DIR =
+
+# Don't change these unless you know what you're doing
+FFMPEG = "ffmpeg"
+FFMPEG_INPUT_ARGS = ['-noaccurate_seek']
+FFMPEG_OUTPUT_ARGS = ['-vcodec', 'copy',
+        '-acodec', 'aac',
+        '-threads:0', '1',
+        '-f', 'mp4',
+        '-movflags', 'frag_keyframe+empty_moov+faststart',
+        'pipe:1']
