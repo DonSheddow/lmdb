@@ -13,26 +13,36 @@
 
 {% block body %}
   
-  <h1 class="film-title">{{ film.title }}</h1>
-  <img id="poster" class="poster" src="/static/images/{{ film.id }}.jpg"/>
-  
-  {% for genre in film.genres %}
-    <a class="search-link" href="">{{ genre.name }}</a>
-  {% endfor %}
-  
-  <p class="summary">{{ film.summary }}</p>
-  
-  {% for performance in film.performances[:5] %}
-  <div class="actor">
-    <a class="search-link" href="">{{ performance.actor.name }}</a>
+  <div class="title-bar">
+    <span class="film-title film-title--big">{{ film.title }}</span>
+    <img src="/static/icons/play4.svg" id="play-button"/>
   </div>
-  {% endfor %}
 
-  <video id="video" class="video-js vjs-default-skin"
-      width="1920" height="1080"
-      preload="none" controls>
-    <source src="/media/test.ogv" type="video/mp4"/>
-  </video>
-  
-  
+  <div id="video-hider" class="hidden">
+    <div id="video-wrapper">
+        <div id="video-container">
+          <video id="video" class="video-js vjs-default-skin vjs-big-play-centered" preload="none" controls>
+            <source src="/media/test.mp4" type="video/mp4"/>
+          </video>
+        </div>
+    </div>
+  </div>
+
+  <div class="poster-wrapper">
+    <img id="poster" class="poster" src="/static/images/{{ film.id }}.jpg"/>
+
+    {% for genre in film.genres %}
+      <a class="search-link" href="">{{ genre.name }}</a>
+    {% endfor %}
+
+    <p class="summary">{{ film.summary }}</p>
+
+    {% for performance in film.performances[:5] %}
+    <div class="actor">
+      <a class="search-link" href="">{{ performance.actor.name }}</a>
+    </div>
+    {% endfor %}
+  </div>
+
+
 {% endblock %}

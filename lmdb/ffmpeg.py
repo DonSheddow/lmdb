@@ -22,7 +22,7 @@ def transcode(path, start):
             yield bytes_
             bytes_ = f.read(512)
     finally:
-        proc.kill() 
+        proc.kill()
         logfile.close()
 
 

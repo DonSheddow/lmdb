@@ -1,3 +1,8 @@
+.poster-wrapper {
+  float: left;
+  padding-bottom: 2em;
+}
+
 .poster {
   overflow: auto;
   float: left;
@@ -17,4 +22,56 @@ ul {
   line-height: 1.4;
   font-size: 18px;
   max-width: 75%;
+}
+
+@keyframes fadeIn {
+  from { transform: scaleX(0.2); opacity: 0.5;}
+  to { transform: scaleX(1); opacity: 1;}
+}
+
+#video-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1a1a;
+  padding: 2em;
+  margin-bottom: 1em;
+}
+
+#video-container {
+  display: none;
+  width: 0px;
+  max-width: 75%;
+}
+
+#video-container.show {
+  display: block;
+  width: 1200px;
+  animation: fadeIn 0.5s ease-out;
+}
+
+.title-bar {
+  padding-bottom: 1em;
+}
+
+#play-button {
+  position: relative;
+  top: 5px;
+  height: calc(2em + 5px);
+  filter: drop-shadow(3px 3px 4px black);
+  margin-left: 1em;
+  transition: transform 0.2s ease;
+}
+
+#play-button:hover {
+  cursor: pointer;
+  transform: scale(1.2);
+}
+
+#play-button.rotate {
+  transform: rotate(90deg);
+}
+
+#play-button.rotate:hover {
+  transform: rotate(90deg) scale(1.2);
 }

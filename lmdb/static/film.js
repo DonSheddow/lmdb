@@ -1,37 +1,61 @@
 'use strict';
 
-
-
 window.onload = function() {
+    var player = videojs("video", {aspectRatio: "16:9", preload: "none"}, function() {
+        var player = this;
+        player.__duration = -1;
+        player.duration = function() { return player.__duration; };
 
-
-    videojs("video", {}, function() {
-        var video = videojs('video');
-        this.__duration = -1;
-        this.duration = function() { return video.__duration; };
-
-        this.currentTime = function(time) {
+        player.oldCurrentTime = player.currentTime;
+        player.currentTime = function(time) {
             if (time == undefined) {
-                return video.start;
+                return player.oldCurrentTime() + player.start;
             }
             else {
-                console.log(time);
-                video.start = time;
-                video.src("/media/test.ogv?start=" + time);
-                video.play();
-                console.log(this);
+                player.start = time;
+                player.oldCurrentTime(0);
+                player.src("/media/test.mp4?start=" + time);
+                player.play();
+                return this;
             }
         }
 
-        video = this;
         var xhr = new XMLHttpRequest();
         xhr.onreadystatechange = function() {
             var response = JSON.parse(this.responseText);
             console.log(response.duration);
-            video.__duration = response.duration;
+            player.__duration = response.duration;
         }
         xhr.open("GET", "/media/duration.js", true);
         xhr.send();
     });
+
+    var play_button = document.getElementById("play-button");
+    var video_hider = document.getElementById("video-hider");
+    var video_container = document.getElementById("video-container");
+    play_button.onclick = function() {
+        video_hider.classList.remove("hidden");
+        video_container.classList.add("show");
+        play_button.classList.toggle("rotate");
+
+        player.play();
+        // Call currentTime() to get duration to display and seek bar to move
+        player.currentTime(0);
+
+        var hidden = false;
+        play_button.onclick = function() {
+            video_hider.classList.toggle("hidden");
+            play_button.classList.toggle("rotate");
+
+            if (!hidden){
+                player.pause();
+            }
+            hidden = !hidden;
+        }
+
+/*        video_container.addEventListener("animationend", function() {
+
+        });*/
+    }
 }
 

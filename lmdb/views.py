@@ -49,7 +49,7 @@ def search():
     return render_template('search.html', films=films)
 
 
-@app.route('/media/test.ogv')
+@app.route('/media/test.mp4')
 def media_test():
     start = request.args.get("start", 0)
     path = "/home/sheddow/Downloads/Mr.Robot.mkv"

@@ -79,6 +79,11 @@ a {
   font-weight: 100;
 }
 
+.film-title--big {
+  font-size: 2em;
+  padding: 10px;
+}
+
 .film-title--inline {
   display: inline;
 /*  float: top;
@@ -108,4 +113,8 @@ a {
 
 .center__inner {
   display: inline-block;
+}
+
+.hidden {
+  display: none;
 }
